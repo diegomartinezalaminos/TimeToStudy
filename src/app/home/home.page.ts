@@ -17,7 +17,7 @@ export class HomePage {
     s:0,
     m:0,
     h:0,
-    start: false,
+    start:false,
     fin:false,
     id:-1
   }
@@ -44,18 +44,22 @@ export class HomePage {
     this.router.navigateByUrl(`/edit${id != undefined ? '/' + id: ''}`);
   }
 
+  //Filtramos la lista ente actividades completas e incompletas
+  ListFilter(estado:boolean): Objetives[]{
+    return this.objetivesList.filter(t => t.complit === estado);
+  }
 
-  //Esta funcion se usa para comprobar si el obb siguiente al pasado por parámetro ha sido completado o no
-  //Se usará para motras o ocultar el icono de la flecha segun el caso
-  downArrow(obb:Objetives): boolean{
-    for (let index = 0; index < this.objetivesList.length; index++){
-      if (this.objetivesList[index] === obb){
-        if(index === this.objetivesList.length - 1){
-          return false;
-        }else if(this.objetivesList[index + 1].complit){
-          return true;
+  //Se va ejecutanod una actividad detras de otra (cuando se termina una empieza la siguinete)
+  playAll(){
+    let array1: Objetives[] = this.objetivesList;
+    for (let index = 0; index > array1.length; index++){
+      console.log(index);
+      console.log(this.time.start + "----" + this.time.fin);
+      if(!this.objetivesList[index].complit){
+        if(!this.time.fin){
+          this.startTime(array1[index].id);
         }else{
-          return false;
+          index--;
         }
       }
     }
