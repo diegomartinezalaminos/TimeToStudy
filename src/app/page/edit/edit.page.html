@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input clearInput [(ngModel)]="objetive.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input clearInput [(ngModel)]="objetive.description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{objetive.h}}:{{objetive.m}}:{{objetive.s}}</ion-label>
+      <ion-datetime (ionChange) = "addTime()" [(ngModel)]="time" displayFormat="HH:mm:ss"></ion-datetime>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="saveObjetive()" expand="block" fill="solid"><ion-icon name="save-outline"></ion-icon></ion-button>
+</ion-content>

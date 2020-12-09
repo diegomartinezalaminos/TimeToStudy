@@ -1,0 +1,7 @@
+{
+  "name": "timer_study",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

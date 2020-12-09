@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end" class="ion-padding" (click)="goEditObjetives()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="duplicate"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list >
+    <ng-container *ngFor="let x of objetivesList">
+      <ion-item *ngIf="!(x.complit)" class="green">
+        <ion-label (click)="info(x)">{{x.title}}</ion-label>
+        <ion-label *ngIf="time.id === x.id">{{time.h}}:{{time.m}}:{{time.s}}</ion-label>
+        <ion-icon *ngIf="!time.start" name="trash-outline" slot="start" (click)="deleteAlert(x)"></ion-icon>
+        <ion-icon *ngIf="!time.start" name="settings-outline" slot="start" (click)="goEditObjetives(x.id)"></ion-icon>
+        <ion-icon *ngIf="!time.start" name="play-circle-outline" (click)="startTime(x.id)"></ion-icon>
+        <ion-icon *ngIf="objetivesList[0] != x" name="chevron-up-circle-outline" (click)="priorityUpDown('up', x)"></ion-icon>
+        <ion-icon *ngIf="objetivesList[objetivesList.length - 1] != x && !downArrow(x)" name="chevron-down-circle-outline" (click)="priorityUpDown('down', x)"></ion-icon>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-list >
+    <ng-container *ngFor="let x of objetivesList">
+      <ion-item *ngIf="x.complit" class="red">
+        <ion-label (click)="info(x)">{{x.title}}</ion-label>
+        <ion-label *ngIf="time.id === x.id">{{time.h}}:{{time.m}}:{{time.s}}</ion-label>
+        <ion-icon *ngIf="!time.start" name="trash-outline" slot="start" (click)="deleteAlert(x)"></ion-icon>
+        <ion-icon *ngIf="!time.start" name="settings-outline" slot="start" (click)="goEditObjetives(x.id)"></ion-icon>
+        <ion-icon *ngIf="!time.start && !x.complit" name="play-circle-outline" (click)="startTime(x.id)"></ion-icon>
+        <ion-icon *ngIf="objetivesList[0] != x && !x.complit" name="chevron-up-circle-outline" (click)="priorityUpDown('up', x)">
+        </ion-icon>
+        <ion-icon *ngIf="objetivesList[objetivesList.length - 1] != x && !x.complit" name="chevron-down-circle-outline"
+          (click)="priorityUpDown('down', x)"></ion-icon>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+</ion-content>
